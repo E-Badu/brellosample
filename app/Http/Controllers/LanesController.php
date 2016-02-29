@@ -16,6 +16,7 @@ class LanesController extends Controller
     public function index()
     {
         //
+        return \App\Lane::all();
     }
 
 
@@ -28,6 +29,11 @@ class LanesController extends Controller
     public function store(Request $request)
     {
         //
+        $lane = new \App\Lane;
+        $lane->name = $request->name;
+        $lane->save();
+
+        return $lane;
     }
 
     /**
@@ -38,7 +44,8 @@ class LanesController extends Controller
      */
     public function show($id)
     {
-        //
+        //return the selected id
+        return \App\Lane::find($id);
     }
 
 
@@ -52,6 +59,11 @@ class LanesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $lane = \App\Lane::find($id);
+        $lane->name = $request->name;
+        $lane->save();
+
+        return $lane;
     }
 
     /**
@@ -63,5 +75,9 @@ class LanesController extends Controller
     public function destroy($id)
     {
         //
+        $lane = \App\Lane::find($id);
+        $lane->delete();
+
+        return $lane;
     }
 }
