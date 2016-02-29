@@ -16,6 +16,7 @@ class TasksController extends Controller
     public function index()
     {
         //
+        return \App\Task::all();
     }
 
  
@@ -28,6 +29,12 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         //
+        $task = new \App\Task;
+        $task->lane_id = $request->lane_id;
+        $task->title = $request->title;
+        $task->save();
+
+        return $task;
     }
 
     /**
@@ -39,6 +46,7 @@ class TasksController extends Controller
     public function show($id)
     {
         //
+        return \App\Task::find($id);
     }
 
  
@@ -52,6 +60,12 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $task = \App\Task::find($id);
+        $task->lane_id = $request->lane_id;
+        $task->title = $request->title;
+        $task->save();
+
+        return $task;
     }
 
     /**
@@ -63,5 +77,9 @@ class TasksController extends Controller
     public function destroy($id)
     {
         //
+        $task = \App\Task::find($id);
+        $task->delete();
+
+        return $task;
     }
 }
