@@ -16,6 +16,7 @@ class TagsController extends Controller
     public function index()
     {
         //
+        return \App\Tag::all();
     }
 
    
@@ -29,6 +30,12 @@ class TagsController extends Controller
     public function store(Request $request)
     {
         //
+        $tag = new \App\Task;
+        $tag->name = $request->name;
+        $tag->color = $request->color;
+        $tag->save();
+
+        return $tag;
     }
 
     /**
@@ -40,6 +47,7 @@ class TagsController extends Controller
     public function show($id)
     {
         //
+        return \App\Tag::find($id);
     }
 
    
@@ -53,6 +61,12 @@ class TagsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $tag = \App\Tag::find($id);
+        $tag->name = $request->name;
+        $tag->color = $request->color;
+        $tag->save();
+
+        return $tag;
     }
 
     /**
@@ -64,5 +78,9 @@ class TagsController extends Controller
     public function destroy($id)
     {
         //
+        $tag = \App\Tag::find($id);
+        $tag->delete();
+
+        return $tag;
     }
 }
